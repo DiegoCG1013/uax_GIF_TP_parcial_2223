@@ -48,8 +48,8 @@ public class Ship {
         return vida == 0;
     }
 
-    public void get_Shot(int x, int y){
-        if (on_Ship(x, y)){
+    public void get_Shot(Point point){
+        if (on_Ship(point.x, point.y)){
             vida--;
         }
     }

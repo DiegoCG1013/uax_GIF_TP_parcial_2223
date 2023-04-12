@@ -49,13 +49,13 @@ public class Ship {
     }
 
     public void get_Shot(Point point){
-        if (on_Ship(point.x, point.y)){
+        if (on_Ship(point)){
             vida--;
         }
     }
 
-    public boolean on_Ship(int x, int y){
-        int[] shot = {x, y};
+    public boolean on_Ship(Point point){
+        int[] shot = {point.x, point.y};
         if (orientacion == CardinalPoints.NORTH || orientacion == CardinalPoints.SOUTH){
             if(shot[0] == punto_Partida.x){
                 if (shot[1] >= punto_Partida.y && shot[1] <= punto_Partida.y + tamanio * orientacion.getMovimiento()){

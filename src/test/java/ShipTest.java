@@ -14,8 +14,8 @@ class ShipTest {
     @org.junit.jupiter.api.Test
     void on_Ship() {
         Ship ship = new Ship(3, new Point(1, 1), CardinalPoints.SOUTH);
-        assertTrue(ship.on_Ship(1, 1));
-        assertTrue(ship.on_Ship(1, 2));
-        assertTrue(ship.on_Ship(1, 3));
+        assertTrue(ship.on_Ship(new Point(1, 1)));
+        assertTrue(ship.on_Ship(new Point(1, 2)));
+        assertTrue(ship.on_Ship(new Point(1, 3)));
     }
 }

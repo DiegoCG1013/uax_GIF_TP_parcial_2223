@@ -16,8 +16,7 @@ public class User {
         System.out.println("Cuantos barcos quieres?(1 - 3)");
         int numShips = sc.nextInt();
         for (int i = 0; i < numShips; i++) {
-            System.out.println("Tamaño del barco " + (i + 1) + ":");
-            int size = sc.nextInt();
+            int size = elegirTamanio();
             System.out.println("Coordenada inicial X del barco " + (i + 1) + ":");
             int x = sc.nextInt();
             System.out.println("Coordenada inicial Y del barco " + (i + 1) + ":");
@@ -27,6 +26,23 @@ public class User {
             ships[i] = new Ship(size, new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
         }
         return new User(ships);
+    }
+
+    public static int elegirTamanio(){
+        System.out.println("Elige el tamaño del barco (1, 3 o 5):");
+        try {
+            int size = sc.nextInt();
+            if (size == 1 || size == 3 || size == 5) {
+                return size;
+            } else {
+                System.out.println("Tamaño no válido");
+                return elegirTamanio();
+            }
+        } catch (Exception e){
+            System.out.println("Tamaño no válido");
+            return elegirTamanio();
+        }
+
     }
 
     public void attack (){

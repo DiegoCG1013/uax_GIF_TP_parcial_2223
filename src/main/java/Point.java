@@ -7,7 +7,8 @@ public class Point {
         this.y = y;
     }
 
-    public void get_ship(Point point){
+    //No entiendo la finalidad de este metodo.
+    /*public void get_ship(Point point){
 
-    }
+    }*/
 }

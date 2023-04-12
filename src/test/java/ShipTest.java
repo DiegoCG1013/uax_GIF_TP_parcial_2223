@@ -18,4 +18,12 @@ class ShipTest {
         assertTrue(ship.on_Ship(new Point(1, 2)));
         assertTrue(ship.on_Ship(new Point(1, 3)));
     }
+
+    @org.junit.jupiter.api.Test
+    void esPosicionValida(){
+        //Test
+        assertTrue(Ship.esPosicionValida(3, new Point(1, 1), CardinalPoints.SOUTH));
+        assertFalse(Ship.esPosicionValida(3, new Point(1, 1), CardinalPoints.NORTH));
+        assertTrue(Ship.esPosicionValida(3, new Point(1, 1), CardinalPoints.EAST));
+    }
 }

@@ -16,16 +16,32 @@ public class User {
         System.out.println("Cuantos barcos quieres?(1 - 3)");
         int numShips = sc.nextInt();
         for (int i = 0; i < numShips; i++) {
-            int size = elegirTamanio();
-            System.out.println("Coordenada inicial X del barco " + (i + 1) + ":");
-            int x = sc.nextInt();
-            System.out.println("Coordenada inicial Y del barco " + (i + 1) + ":");
-            int y = sc.nextInt();
-            System.out.println("Orientación del barco (North, South, East, West) " + (i + 1) + ":");
-            String orientation = sc.next();
-            ships[i] = new Ship(size, new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
+            ships[i] = crearBarco(i);
         }
         return new User(ships);
+    }
+
+    public static Ship crearBarco(int i){
+        try {
+            int size = elegirTamanio();
+            System.out.println("Coordenada inicial X del barco " + (i + 1) + ":");
+            int x = sc.nextInt() - 1;
+            System.out.println("Coordenada inicial Y del barco " + (i + 1) + ":");
+            int y = sc.nextInt() - 1;
+            System.out.println("Orientación del barco (North, South, East, West) " + (i + 1) + ":");
+            String orientation = sc.next();
+            if (Ship.esPosicionValida(size, new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()))) {
+                if (size == 1) return new Canoa(new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
+                else if (size == 3) return new Fragata(new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
+                else return new Portaaviones(new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
+            } else {
+                System.out.println("Posición no válida");
+                return crearBarco(i);
+            }
+        } catch (Exception e){
+            System.out.println("Orientacion no válida");
+            return crearBarco(i);
+        }
     }
 
     public static int elegirTamanio(){

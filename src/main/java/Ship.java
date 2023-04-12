@@ -4,12 +4,26 @@ public class Ship {
     protected int vida;
     protected Point punto_Partida;
     CardinalPoints orientacion;
+    //Incluyo aqui el tamaño del tablero, se podria poner en cualquier otro lado
+    protected static final int BOARD_SIZE = 20;
 
     public Ship(int tamanio, Point punto_Partida, CardinalPoints orientacion) {
         this.tamanio = tamanio;
         vida = tamanio;
         this.punto_Partida = punto_Partida;
         this.orientacion = orientacion;
+    }
+
+    //Metodo para saber si con la orientacion y el punto de partida se puede colocar el barco
+    public static boolean esPosicionValida(int tamanio, Point punto_Partida, CardinalPoints orientacion){
+        if (punto_Partida.x < 0 || punto_Partida.y < 0 || punto_Partida.x > BOARD_SIZE || punto_Partida.y > BOARD_SIZE) return false;
+        Point puntoFinal;
+        if (orientacion == CardinalPoints.NORTH || orientacion == CardinalPoints.SOUTH){
+            puntoFinal = new Point(punto_Partida.x, punto_Partida.y + ((tamanio - 1) * orientacion.getMovimiento()));
+        } else {
+            puntoFinal = new Point(punto_Partida.x + ((tamanio - 1) * orientacion.getMovimiento()), punto_Partida.y);
+        }
+        return puntoFinal.x >= 0 && puntoFinal.y >= 0 && puntoFinal.x < BOARD_SIZE && puntoFinal.y < BOARD_SIZE;
     }
 
     public int getTamanio() {

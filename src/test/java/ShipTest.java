@@ -15,10 +15,10 @@ class ShipTest {
 
     @org.junit.jupiter.api.Test
     void on_Ship() {
-        Ship ship = new Ship(3, new Point(1, 1), CardinalPoints.SOUTH);
+        Ship ship = new Ship(3, new Point(1, 1), CardinalPoints.EAST);
         assertTrue(ship.on_Ship(new Point(1, 1)));
-        assertTrue(ship.on_Ship(new Point(1, 2)));
-        assertTrue(ship.on_Ship(new Point(1, 3)));
+        assertTrue(ship.on_Ship(new Point(2, 1)));
+        assertTrue(ship.on_Ship(new Point(3, 1)));
     }
 
     @org.junit.jupiter.api.Test
@@ -26,13 +26,13 @@ class ShipTest {
         assertTrue(Ship.esPosicionValida(3, new Point(1, 1), CardinalPoints.SOUTH));
         assertFalse(Ship.esPosicionValida(3, new Point(1, 1), CardinalPoints.NORTH));
         assertTrue(Ship.esPosicionValida(3, new Point(1, 1), CardinalPoints.EAST));
+
     }
 
     @org.junit.jupiter.api.Test
     void collide(){
-        //Test
-        Ship newShip = new Ship(3, new Point(1, 2), CardinalPoints.SOUTH);
-        Ship ship = new Ship(3, new Point(2, 1), CardinalPoints.EAST);
-        assertFalse(ship.collide(newShip));
+        Ship newShip = new Ship(3, new Point(1, 2), CardinalPoints.EAST);
+        Ship ship = new Ship(3, new Point(2, 1), CardinalPoints.SOUTH);
+        assertTrue(ship.collide(newShip));
     }
 }

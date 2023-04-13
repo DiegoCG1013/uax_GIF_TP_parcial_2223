@@ -87,21 +87,37 @@ public class Ship {
         return false;
     }
 
-    public boolean collide (Ship ship){
-        if (orientacion == CardinalPoints.NORTH || orientacion == CardinalPoints.SOUTH){
-            if (ship.getPunto_Partida().x == punto_Partida.x){
-                if (ship.getPunto_Partida().y >= punto_Partida.y && ship.getPunto_Partida().y <= punto_Partida.y + tamanio * orientacion.getMovimiento()){
-                    return true;
+    public boolean collide (Ship ship) {
+        //recorre todas las coordenadas de un barco
+        if(orientacion == CardinalPoints.NORTH || orientacion == CardinalPoints.SOUTH){
+            if (orientacion == CardinalPoints.NORTH){
+                for (int i = punto_Partida.y; i > punto_Partida.y + tamanio * orientacion.getMovimiento(); i--){
+                    if (ship.on_Ship(new Point(punto_Partida.x, i))){
+                        return true;
+                    }
+                }
+            } else {
+                for (int i = punto_Partida.y; i < punto_Partida.y + tamanio * orientacion.getMovimiento(); i++){
+                    if (ship.on_Ship(new Point(punto_Partida.x, i))){
+                        return true;
+                    }
                 }
             }
         } else {
-            if (ship.getPunto_Partida().y == punto_Partida.y){
-                if (ship.getPunto_Partida().x >= punto_Partida.x && ship.getPunto_Partida().x <= punto_Partida.x + tamanio * orientacion.getMovimiento()){
-                    return true;
+            if (orientacion == CardinalPoints.EAST){
+                for (int i = punto_Partida.x; i < punto_Partida.x + tamanio * orientacion.getMovimiento(); i++){
+                    if (ship.on_Ship(new Point(i, punto_Partida.y))){
+                        return true;
+                    }
+                }
+            } else {
+                for (int i = punto_Partida.x; i > punto_Partida.x + tamanio * orientacion.getMovimiento(); i--){
+                    if (ship.on_Ship(new Point(i, punto_Partida.y))){
+                        return true;
+                    }
                 }
             }
         }
         return false;
     }
-
 }

@@ -21,7 +21,7 @@ public class User {
                 Ship shipx = crearBarco(i);
                 if (!collide(ships, shipx)) ships[i] = shipx;
                 else {
-                    System.out.println("Barco colisionado");
+                    System.out.println("Barco colisionando, vuelve a intentarlo");
                     i--;
                 }
             }
@@ -88,13 +88,11 @@ public class User {
     }
 
     public static  boolean collide (Ship[] ships, Ship ship){
-        boolean collide = false;
-        for (int i = 0; i < 3; i++){
-            if (ships[i] != null) {
-                collide = ship.collide(ships[i]);
+        if (ships[0] == null) return false;
+        for (int i = 0; i < ships.length; i++){
+                if (ship.collide(ships[i])) return true;
             }
-        }
-        return collide;
+        return false;
     }
 
     public void get_Shot (Point point){

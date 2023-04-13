@@ -70,12 +70,13 @@ public class Ship {
     }
 
     public boolean on_Ship(Point point){
+        if (punto_Partida.x == point.x && punto_Partida.y == point.y){
+            return true;
+        }
         int[] shot = {point.x, point.y};
         if (orientacion == CardinalPoints.NORTH || orientacion == CardinalPoints.SOUTH){
             if(shot[0] == punto_Partida.x){
-                if (shot[1] >= punto_Partida.y && shot[1] <= punto_Partida.y + tamanio * orientacion.getMovimiento()){
-                    return true;
-                }
+                if (shot[1] >= punto_Partida.y && shot[1] <= punto_Partida.y + tamanio * orientacion.getMovimiento()) return true;
             }
         } else {
             if(shot[1] == punto_Partida.y){

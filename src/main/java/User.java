@@ -12,22 +12,28 @@ public class User {
 
     public static User init (){
         //Programa inicial para crear un usuario, pidiendo los barcos
-        Ship[] ships = {null, null, null};
-        System.out.println("Cuantos barcos quieres?(1 - 3)");
-        int numShips = sc.nextInt();
-        for (int i = 0; i < numShips; i++) {
-            ships[i] = crearBarco(i);
+        try {
+            System.out.println("Cuantos barcos quieres?(1 - 3)");
+            int numShips = sc.nextInt();
+            if (numShips < 1 || numShips > 3) throw new Exception();
+            Ship[] ships = new Ship[numShips];
+            for (int i = 0; i < numShips; i++) {
+                ships[i] = crearBarco(i);
+            }
+            return new User(ships);
+        } catch (Exception e){
+            System.out.println("Número de barcos no válido");
+            return init();
         }
-        return new User(ships);
     }
 
     public static Ship crearBarco(int i){
         try {
             int size = elegirTamanio();
             System.out.println("Coordenada inicial X del barco " + (i + 1) + ":");
-            int x = sc.nextInt() - 1;
+            int x = sc.nextInt();
             System.out.println("Coordenada inicial Y del barco " + (i + 1) + ":");
-            int y = sc.nextInt() - 1;
+            int y = sc.nextInt();
             System.out.println("Orientación del barco (North, South, East, West) " + (i + 1) + ":");
             String orientation = sc.next();
             if (Ship.esPosicionValida(size, new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()))) {
@@ -61,8 +67,19 @@ public class User {
 
     }
 
-    public void attack (){
-
+    public void attack (User enemy){
+        try {
+            System.out.println("Coordenada X del ataque (Entre 0 y 19):");
+            int x = sc.nextInt();
+            System.out.println("Coordenada Y del ataque (Entre 0 y 19):");
+            int y = sc.nextInt();
+            if (x < 0 || x > 19 || y < 0 || y > 19) throw new Exception();
+            System.out.println("Atacando a las coordenadas (" + x + ", " + y + ")");
+            enemy.get_Shot(new Point(x, y));
+        } catch (Exception e){
+            System.out.println("Coordenadas no válidas");
+            attack(enemy);
+        }
     }
 
     public void get_Shot (Point point){
@@ -71,7 +88,7 @@ public class User {
         }
     }
 
-    public void is_Alive (){
+    public boolean is_Alive (){
         boolean vivo = false;
         for(Ship ship : ships){
             if(!ship.is_Sunk()){
@@ -79,13 +96,14 @@ public class User {
             }
         }
         if (!vivo)die();
+        return vivo;
     }
 
     public void die (){
         alive = false;
     }
 
-    public boolean isAlive() {
+    public boolean getIsAlive() {
         return alive;
     }
 

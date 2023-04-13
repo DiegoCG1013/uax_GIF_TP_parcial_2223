@@ -64,6 +64,7 @@ public class Ship {
 
     public void get_Shot(Point point){
         if (on_Ship(point)){
+            System.out.println("¡Tocado!");
             vida--;
         }
     }
@@ -79,6 +80,23 @@ public class Ship {
         } else {
             if(shot[1] == punto_Partida.y){
                 if (shot[0] >= punto_Partida.x && shot[0] <= punto_Partida.x + tamanio * orientacion.getMovimiento()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean collide (Ship ship){
+        if (orientacion == CardinalPoints.NORTH || orientacion == CardinalPoints.SOUTH){
+            if (ship.getPunto_Partida().x == punto_Partida.x){
+                if (ship.getPunto_Partida().y >= punto_Partida.y && ship.getPunto_Partida().y <= punto_Partida.y + tamanio * orientacion.getMovimiento()){
+                    return true;
+                }
+            }
+        } else {
+            if (ship.getPunto_Partida().y == punto_Partida.y){
+                if (ship.getPunto_Partida().x >= punto_Partida.x && ship.getPunto_Partida().x <= punto_Partida.x + tamanio * orientacion.getMovimiento()){
                     return true;
                 }
             }

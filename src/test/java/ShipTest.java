@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShipTest {
@@ -21,9 +23,16 @@ class ShipTest {
 
     @org.junit.jupiter.api.Test
     void esPosicionValida(){
-        //Test
         assertTrue(Ship.esPosicionValida(3, new Point(1, 1), CardinalPoints.SOUTH));
         assertFalse(Ship.esPosicionValida(3, new Point(1, 1), CardinalPoints.NORTH));
         assertTrue(Ship.esPosicionValida(3, new Point(1, 1), CardinalPoints.EAST));
+    }
+
+    @org.junit.jupiter.api.Test
+    void collide(){
+        //Test
+        Ship newShip = new Ship(3, new Point(1, 2), CardinalPoints.SOUTH);
+        Ship ship = new Ship(3, new Point(2, 1), CardinalPoints.EAST);
+        assertFalse(ship.collide(newShip));
     }
 }

@@ -18,7 +18,12 @@ public class User {
             if (numShips < 1 || numShips > 3) throw new Exception();
             Ship[] ships = new Ship[numShips];
             for (int i = 0; i < numShips; i++) {
-                ships[i] = crearBarco(i);
+                Ship shipx = crearBarco(i);
+                if (!collide(ships, shipx)) ships[i] = shipx;
+                else {
+                    System.out.println("Barco colisionado");
+                    i--;
+                }
             }
             return new User(ships);
         } catch (Exception e){
@@ -80,6 +85,16 @@ public class User {
             System.out.println("Coordenadas no válidas");
             attack(enemy);
         }
+    }
+
+    public static  boolean collide (Ship[] ships, Ship ship){
+        boolean collide = false;
+        for (int i = 0; i < 3; i++){
+            if (ships[i] != null) {
+                collide = ship.collide(ships[i]);
+            }
+        }
+        return collide;
     }
 
     public void get_Shot (Point point){

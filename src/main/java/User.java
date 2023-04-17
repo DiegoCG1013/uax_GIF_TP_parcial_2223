@@ -42,9 +42,9 @@ public class User {
             System.out.println("Orientación del barco (North, South, East, West) " + (i + 1) + ":");
             String orientation = sc.next();
             if (Ship.esPosicionValida(size, new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()))) {
-                if (size == 1) return new Canoa(new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
-                else if (size == 3) return new Fragata(new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
-                else return new Portaaviones(new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
+                if (size == 1) return new Canoe(new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
+                else if (size == 3) return new Frigate(new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
+                else return new Battleship(new Point(x, y), CardinalPoints.valueOf(orientation.toUpperCase()));
             } else {
                 System.out.println("Posición no válida");
                 return crearBarco(i);

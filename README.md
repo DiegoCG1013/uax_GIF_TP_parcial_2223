@@ -50,6 +50,5 @@ Hay varios tipos:
 - Default: Es la visibilidad por defecto, solo se puede acceder desde el mismo paquete.  
 - Private: No permite el acceso fuera de la misma clase donde se define  
 
-
-
-
+## Ejercicios 4, 5, 6 y 7
+Todos estan hechos en el src, ademas de que estan bastante bien marcados con los commit. Hize test para los metodos que mas complejidad tenian.

@@ -31,8 +31,8 @@ class ShipTest {
 
     @org.junit.jupiter.api.Test
     void collide(){
-        Ship newShip = new Ship(3, new Point(1, 2), CardinalPoints.EAST);
-        Ship ship = new Ship(3, new Point(2, 1), CardinalPoints.SOUTH);
-        assertTrue(ship.collide(newShip));
+        Ship newShip = new Ship(3, new Point(1, 2), CardinalPoints.SOUTH);
+        Ship ship = new Ship(3, new Point(2, 1), CardinalPoints.EAST);
+        assertFalse(ship.collide(newShip));
     }
 }

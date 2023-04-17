@@ -90,34 +90,11 @@ public class Ship {
 
     public boolean collide (Ship ship) {
         //recorre todas las coordenadas de un barco
-        if(orientacion == CardinalPoints.NORTH || orientacion == CardinalPoints.SOUTH){
-            if (orientacion == CardinalPoints.NORTH){
-                for (int i = punto_Partida.y; i > punto_Partida.y + tamanio * orientacion.getMovimiento(); i--){
-                    if (ship.on_Ship(new Point(punto_Partida.x, i))){
-                        return true;
-                    }
-                }
-            } else {
-                for (int i = punto_Partida.y; i < punto_Partida.y + tamanio * orientacion.getMovimiento(); i++){
-                    if (ship.on_Ship(new Point(punto_Partida.x, i))){
-                        return true;
-                    }
-                }
-            }
-        } else {
-            if (orientacion == CardinalPoints.EAST){
-                for (int i = punto_Partida.x; i < punto_Partida.x + tamanio * orientacion.getMovimiento(); i++){
-                    if (ship.on_Ship(new Point(i, punto_Partida.y))){
-                        return true;
-                    }
-                }
-            } else {
-                for (int i = punto_Partida.x; i > punto_Partida.x + tamanio * orientacion.getMovimiento(); i--){
-                    if (ship.on_Ship(new Point(i, punto_Partida.y))){
-                        return true;
-                    }
-                }
-            }
+        Point point;
+        for (int i = 0; i < tamanio; i++) {
+            point = new Point(punto_Partida.x + i * orientacion.getMovimiento(), punto_Partida.y + i * orientacion.getMovimiento());
+            //si alguna de las coordenadas del barco colisiona con el barco pasado por parametro, devuelve true
+            if (ship.on_Ship(point)) return true;
         }
         return false;
     }
